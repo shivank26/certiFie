@@ -1,19 +1,34 @@
 import React from 'react'
 import './dashboard.css'
 import Dashobject from './Dashobjects'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Homepage from './Homepage'
+import axios from 'axios'
 
 class Dashboard extends React.Component {
 
-    state = {userToken: ''}
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
+    }
+
+    logout () {
+        axios.get(`https://polar-reaches-87686.herokuapp.com/users/logout/${this.props.location.state.userToken}`)
+        .then((response) => {
+            // console.log(response.data);
+            alert('Logout Successful')
+        })
+        .catch((error) => {
+            alert(error.response.data.data.message)
+        });
+    }
 
     render() {
         // console.log('Inside Dashboard');
         try {
         if(this.props.location.state.loggedIn) {
             
-            console.log('User Token', this.props.location.state.userToken);
+            // console.log('User Token', this.props.location.state.userToken);
             
             return (
                 <div className="dashboard container">
@@ -25,8 +40,8 @@ class Dashboard extends React.Component {
                         </div>
                         <div className="col-md-4"></div>
                         <div className="col-md-4 right-float">
-                            <Link to={`/`}>
-                                <button className="btn logout-btn">Logout</button>
+                            <Link to="/">
+                                <button className="btn logout-btn" onClick={this.logout}>Logout</button>
                             </Link>
                         </div>
                     </div>

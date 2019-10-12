@@ -3,7 +3,6 @@ import './login.css'
 import { Redirect } from 'react-router-dom'
 
 import axios from 'axios'
-import Dashboard from './Dashboard';
 
 class Login extends React.Component {
 
@@ -18,7 +17,7 @@ class Login extends React.Component {
     }
 
     verifyPassword = event => {
-        console.log(this.state.password);
+        // console.log(this.state.password);
 
         if(this.state.password === '') {
             alert('Please Enter Password');
@@ -45,7 +44,7 @@ class Login extends React.Component {
             if(response.data.status === 'success') {
                 this.setState({userToken: response.data.data.userToken, redirect: true});
             }
-            console.log('User Token', this.state.userToken);
+            // console.log('User Token', this.state.userToken);
         }).catch((error) => {
             alert(error.response.data.data.message)            
         });
