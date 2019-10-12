@@ -1,5 +1,11 @@
+body {
+  background-color: #efecea !important;
+  color: #334854 !important;
+}
+
 .App {
   text-align: center;
+  margin-top: 3rem;;
 }
 
 .App-logo {
@@ -19,4 +25,43 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  table-layout: auto;
+  border-bottom: 1px solid #F0F0F0;
+  text-align: left;
+}
+
+.right-float {
+  float: right;
+  text-align: right;
+}
+
+.dashboard .logout-btn {
+  color: #e04462;
+}
+
+.dashboard .logout-btn:hover {
+  color: #efecea;
+  background-color: #e04462;
+}
+
+.form .search-btn {
+  margin-top: 1rem !important;
+  border: 1px solid #334854;
+  color: #334854;
+  border-radius: 8px;
+  width: 100px;
+  margin-top: 0;
+  background: rgba(0, 0, 0, 0);
+}
+
+.form .search-btn:hover {
+  color: #FFFFFF;
+  background-color: #334854;
 }

@@ -1,0 +1,14 @@
+.container .login-form .login-btn {
+    margin-top: 2rem;
+    border: 2px solid #334854;
+    color: #334854;
+    border-radius: 15px;
+    width: 100px;
+    margin-top: 0;
+    background: rgba(0, 0, 0, 0);
+}
+
+.login-form .login-btn:hover {
+    color: #FFFFFF;
+    background-color: #334854;
+}

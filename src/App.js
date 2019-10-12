@@ -1,11 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar'
+import Dashboard from './components/Dashboard'
+import Homepage from './components/Homepage'
+import StoreData from './components/StoreData'
+import SearchData from './components/SearchData'
+import ShowData from './components/ShowData'
+import {Route, Link, BrowserRouter as Router} from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="App app-body">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,7 +25,14 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+      <Router>
+        <Route exact path="/" component={Homepage}/>
+        <Route path="/dashboard" component={Dashboard}/>
+        <Route path="/dashboard/store" component={StoreData} />
+        <Route path="/dashboard/search" component={SearchData} />
+        <Route path="/dashboard/show" component={ShowData} />
+      </Router>
     </div>
   );
 }
