@@ -1,13 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
 import Homepage from './components/Homepage'
 import StoreData from './components/StoreData'
 import SearchData from './components/SearchData'
 import ShowData from './components/ShowData'
-import {Route, Link, BrowserRouter as Router} from 'react-router-dom'
+import {Route, BrowserRouter as Router} from 'react-router-dom'
 
 function App() {
   return (

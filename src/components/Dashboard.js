@@ -1,7 +1,6 @@
 import React from 'react'
 import './dashboard.css'
-import Dashobject from './Dashobjects'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Homepage from './Homepage'
 import axios from 'axios'
 
@@ -35,8 +34,12 @@ class Dashboard extends React.Component {
       })
       .then(res => {
         if(res.data.status === 'success') {
-            console.log(res.data.data)
-            this.setState({download: true,downloadcontent:JSON.stringify(res.data.data)});
+            console.log(res.data.data);
+            var display="";
+            for(var i=0;i<res.data.data.result.length;i++){
+                display+='\n-----------------------------------------------------------\n'+(i+1)+'. '+res.data.data.result[i].verifyUrl;
+            }
+            this.setState({download: true,downloadcontent:display});
         }
       }).catch((error) => {
         alert(error.response.data.data.message)
@@ -107,6 +110,8 @@ class Dashboard extends React.Component {
 
 
                     <div>
+                        <input type="file" name="file" onChange={this.onChangeHandler}/>
+                        <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload Data</button>
                         <textarea rows='15' value={this.state.downloadcontent}/>
                     </div>
 
