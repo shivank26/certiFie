@@ -1,8 +1,10 @@
-import React from 'react'
-import './dashboard.css'
-import { Link } from 'react-router-dom'
-import Homepage from './Homepage'
-import axios from 'axios'
+import React from 'react';
+import './dashboard.css';
+import { Link } from 'react-router-dom';
+import Homepage from './Homepage';
+import axios from 'axios';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Button from 'react-bootstrap/Button';
 
 class Dashboard extends React.Component {
 
@@ -11,7 +13,8 @@ class Dashboard extends React.Component {
         this.state = {
             selectedFile: null,
             download:false,
-            downloadcontent:null
+            downloadcontent:null,
+            resjson:""
           }
         this.logout = this.logout.bind(this);
     }
@@ -36,13 +39,14 @@ class Dashboard extends React.Component {
         if(res.data.status === 'success') {
             console.log(res.data.data);
             var display="";
-            for(var i=0;i<res.data.data.result.length;i++){
-                display+='\n-----------------------------------------------------------\n'+(i+1)+'. '+res.data.data.result[i].verifyUrl;
+            display+='1. '+res.data.data.result[0].verifyUrl;
+            for(var i=1;i<res.data.data.result.length;i++){
+                display+='\n\n'+(i+1)+'. '+res.data.data.result[i].verifyUrl;
             }
-            this.setState({download: true,downloadcontent:display});
+            this.setState({download: true,downloadcontent:display,resjson:JSON.stringify(res.data.data)});
         }
       }).catch((error) => {
-        alert(error.response.data.data.message)
+        alert("Please select file")
     });
     }
 
@@ -82,8 +86,9 @@ class Dashboard extends React.Component {
 
 
                     <div>
+                        <p>Select <b>.csv</b> file and then click upload</p>
                         <input type="file" name="file" onChange={this.onChangeHandler}/>
-                        <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload Data</button>
+                        <Button variant="success" onClick={this.onClickHandler}>Upload Data</Button>
                     </div>
  
                 </div>
@@ -111,8 +116,16 @@ class Dashboard extends React.Component {
 
                     <div>
                         <input type="file" name="file" onChange={this.onChangeHandler}/>
-                        <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload Data</button>
+                        <Button style={{margin: "10px"}} variant="success" onClick={this.onClickHandler}>Upload Data</Button>
                         <textarea rows='15' value={this.state.downloadcontent}/>
+                        <div>
+                            <CopyToClipboard style={{margin: "10px"}} text={this.state.downloadcontent}>
+                                <Button>Copy plain text</Button>
+                            </CopyToClipboard>
+                            <CopyToClipboard style={{margin: "10px"}} text={this.state.resjson}>
+                                <Button>Copy JSON</Button>
+                            </CopyToClipboard>
+                        </div>
                     </div>
 
                 </div>
