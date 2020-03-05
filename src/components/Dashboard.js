@@ -39,14 +39,14 @@ class Dashboard extends React.Component {
         if(res.data.status === 'success') {
             console.log(res.data.data);
             var display="";
-            display+='1. '+res.data.data.result[0].verifyUrl;
-            for(var i=1;i<res.data.data.result.length;i++){
-                display+='\n\n'+(i+1)+'. '+res.data.data.result[i].verifyUrl;
+            display+='date of issue,branch,category,sem,title,name1,usn1,name2,usn2,name3,usn3,name4,usn4,url\n';
+            for(var i=0;i<res.data.data.result.length;i++){
+                display+=res.data.data.result[i]['date of issue']+','+res.data.data.result[i].branch+','+res.data.data.result[i].category+','+res.data.data.result[i].sem+','+res.data.data.result[i].title+','+res.data.data.result[i].usn1+','+res.data.data.result[i].name1+','+res.data.data.result[i].usn2+','+res.data.data.result[i].name2+','+res.data.data.result[i].usn3+','+res.data.data.result[i].name3+','+res.data.data.result[i].usn4+','+res.data.data.result[i].name4+','+res.data.data.result[i].verifyUrl+'\n';
             }
             this.setState({download: true,downloadcontent:display,resjson:JSON.stringify(res.data.data)});
         }
       }).catch((error) => {
-        alert("Please select file")
+        alert("File not selected or wrong file format.\nPlease upload only .csv file")
     });
     }
 
